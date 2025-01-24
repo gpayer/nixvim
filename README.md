@@ -1,17 +1,17 @@
-# Nixvim template
+# Modular nixvim repository
 
-This template gives you a good starting point for configuring nixvim standalone.
+The goal of this nixvim configuration is to have a simple way to add
+a specialized instance of nixvim to your devshell.
+This can be accomplished by adding a list of predefined modules according
+to the specific needs.
 
-## Configuring
+## Modules and custom-package function
 
-To start configuring, just add or modify the nix files in `./config`.
-If you add a new configuration file, remember to add it to the
-[`config/default.nix`](./config/default.nix) file
+Included in this flake in `lib.${system}.nixvimModules`:
 
-## Testing your new configuration
+* [`default`](./config/default.nix)
+* [`base`](./config/base.nix)
+* ...
 
-To test your configuration simply run the following command
-
-```
-nix run .
-```
+Function to build your custom named nixvim package:
+* `custom-modules <nixvim derivation> "name-of-executable"`
