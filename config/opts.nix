@@ -1,0 +1,24 @@
+{ ... }:
+
+{
+  config = {
+    opts = {
+      number = true;
+      relativenumber = true;
+
+      autoindent = true;
+      tabstop = 2;
+      shiftwidth = 2;
+      expandtab = true;
+
+      clipboard = "unnamedplus";
+    };
+
+    globals = {
+      mapleader = " ";
+      maplocaleader = " ";
+    };
+
+    clipboard.providers.xsel.enable = true;
+  };
+}
