@@ -5,6 +5,7 @@
     opts = {
       number = true;
       relativenumber = true;
+      signcolumn = "number";
 
       autoindent = true;
       tabstop = 2;

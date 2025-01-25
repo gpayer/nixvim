@@ -61,6 +61,18 @@
             action = "find_files";
             options.desc = "Find files";
           };
+          "<leader>fF" = {
+            action = "find_files hidden=true";
+            options.desc = "Find files (+hidden)";
+          };
+          "<leader>fg" = {
+            action = "git_files";
+            options.desc = "Find git files";
+          };
+          "<leader>fG" = {
+            action = "git_files hidden=true";
+            options.desc = "Find git files (+hidden)";
+          };
           "<leader>fh" = {
             action = "help_tags";
             options.desc = "View help tags";
