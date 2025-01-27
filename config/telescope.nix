@@ -6,17 +6,64 @@
       telescope = {
         enable = true;
 
+        luaConfig.pre = ''
+          local action_state = require('telescope.actions.state')
+
+          local acts = {
+            close_buffer = function(prompt_bufnr)
+              local current_picker = action_state.get_current_picker(prompt_bufnr)
+              current_picker:delete_selection(function(selection)
+                vim.api.nvim_buf_delete(selection.bufnr, { force = true })
+              end)
+            end
+          }
+        '';
+
         settings = {
           defaults = {
             layout_config = {
               prompt_position = "top";
             };
             sorting_strategy = "ascending";
+            file_ignore_patterns = [ "^node_modules/" "^.git/" "^vendor/" ];
+          };
+          pickers = {
+            find_files = {
+              hidden = true;
+            };
+            buffers = {
+              mappings = {
+                i = {
+                  "<c-d>".__raw = "acts.close_buffer";
+                };
+                n = {
+                  "<c-d>".__raw = "acts.close_buffer";
+                  "x".__raw = "acts.close_buffer";
+                };
+              };
+            };
           };
         };
 
         extensions = {
-          undo.enable = true;
+          undo = {
+            enable = true;
+            settings = {
+              side_by_side = true;
+              mappings = {
+                i = {
+                  "<cr>".__raw = "require('telescope-undo.actions').restore";
+                  "<c-cr>".__raw = "require('telescope-undo.actions').yank_additions";
+                  "<s-cr>".__raw = "require('telescope-undo.actions').yank_deletions";
+                };
+                n = {
+                  Y.__raw = "require('telescope-undo.actions').yank_deletions";
+                  u.__raw = "require('telescope-undo.actions').restore";
+                  y.__raw = "require('telescope-undo.actions').yank_additions";
+                };
+              };
+            };
+          };
           ui-select.enable = true;
         };
 
@@ -89,9 +136,13 @@
             action = "oldfiles";
             options.desc = "View old files";
           };
-          "<leader>fr" = {
+          "<leader>f\"" = {
             action = "registers";
             options.desc = "View registers";
+          };
+          "<leader>fr" = {
+            action = "lsp_references";
+            options.desc = "View symbol references";
           };
           "<leader>fl" = {
             action = "lsp_document_symbols";
