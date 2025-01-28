@@ -63,7 +63,7 @@
           };
 
           lspBuf = {
-            K = "hover";
+            # K = "hover"; # this is now in hover.nix
             gr = "references";
             gd = "definition";
             gi = "implementation";

@@ -9,5 +9,6 @@
     ./lazygit.nix
     ./git-conflict.nix
     ./copilot.nix
+    ./hover.nix
   ];
 }
