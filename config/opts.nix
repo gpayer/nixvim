@@ -13,6 +13,8 @@
       expandtab = true;
 
       clipboard = "unnamedplus";
+
+      scrolloff = 15;
     };
 
     globals = {
