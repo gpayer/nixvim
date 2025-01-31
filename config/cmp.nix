@@ -5,7 +5,7 @@
     plugins = {
       cmp = {
         enable = true;
-        autoEnableSources = false;
+        autoEnableSources = true;
         settings = { 
           mapping = {
             __raw = ''
@@ -21,21 +21,14 @@
           snippet = {
             expand = "function(args) require('luasnip').lsp_expand(args.body) end";
           };
-          sources = {
-            __raw = ''
-              cmp.config.sources({
-                { name = 'nvim_lsp' },
-                { name = 'nvim_lsp_signature_help' },
-                -- { name = 'vsnip' },
-                { name = 'luasnip' },
-                -- { name = 'ultisnips' },
-                -- { name = 'snippy' },
-              }, {
-                { name = 'buffer' },
-                { name = 'path' },
-              })
-            '';
-          };
+          sources = [
+            { name = "nvim_lsp"; }
+            { name = "nvim_lsp_signature_help"; }
+            { name = "nvim_lua"; }
+            { name = "buffer"; }
+            { name = "path"; }
+            { name = "luasnip"; }
+          ];
 
           view = {
             docs.auto_open = true;
@@ -47,14 +40,6 @@
           };
         };
       };
-
-      cmp-buffer.enable = true;
-      cmp-nvim-lsp.enable = true;
-      cmp-nvim-lsp-signature-help.enable = true;
-      cmp-nvim-lua.enable = true;
-      cmp-path.enable = true;
-
-      luasnip.enable = true;
     };
   };
 }

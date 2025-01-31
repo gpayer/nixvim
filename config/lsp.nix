@@ -10,7 +10,18 @@
           # TODO: add more servers: lua, htmx, docker-compose, docker, (vue?), arduino/c++, python
           # TODO: check how language specific confs can be separated into modules (efm might be difficult)
           nixd.enable = true;
-          gopls.enable = true;
+          gopls = {
+            enable = true;
+            settings = {
+              gopls = {
+                completeUnimported = true;
+                usePlaceholders = true;
+                analyses = {
+                  unusedparams = true;
+                };
+              };
+            };
+          };
           templ.enable = true;
           efm = {
             enable = true;

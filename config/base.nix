@@ -25,7 +25,16 @@
 
       auto-session.enable = true;
 
-      gitsigns.enable = true;
+      gitsigns = {
+        enable = true;
+
+        settings = {
+          signcolumn = false;
+          numhl = true;
+          linehl = true;
+          current_line_blame = true;
+        };
+      };
 
       web-devicons.enable = true;
 
