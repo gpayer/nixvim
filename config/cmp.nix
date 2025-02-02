@@ -15,6 +15,14 @@
                 ['<C-Space>'] = cmp.mapping.complete(),
                 ['<C-e>'] = cmp.mapping.abort(),
                 ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                ["<C-q>"] = cmp.mapping(function(fallback)
+                      local luasnip = require("luasnip")
+                      if luasnip.locally_jumpable(1) then
+                        luasnip.jump(1)
+                      else
+                        fallback()
+                      end
+                    end, { "i", "s" }),
               })
             '';
           };
