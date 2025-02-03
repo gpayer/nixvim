@@ -10,5 +10,7 @@
     ./git-conflict.nix
     ./copilot.nix
     ./hover.nix
+    ./dap.nix
+    ./golang
   ];
 }
