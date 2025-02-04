@@ -3,6 +3,7 @@
 {
   imports = [
     ./opts.nix
+    ./performance.nix
     ./catppuccin.nix
     ./bufferline.nix
     ./telescope.nix

@@ -28,24 +28,22 @@
 
 
     diagnostics = {
-      float = true;
-      severity_sort = false;
+      float = {
+        border = "rounded";
+      };
+      severity_sort = true;
       signs = {
         text = {
-          # TODO: this does not work yet
-          "vim.diagnostic.severity.ERROR" = "";
-          "vim.diagnostic.severity.WARN" = "";
-          "vim.diagnostic.severity.INFO" = "";
-          "vim.diagnostic.severity.HINT" = "H";
-        };
-        linehl = {
-            "vim.diagnostic.severity.ERROR" = "ErrorMsg";
+          "__rawKey__vim.diagnostic.severity.ERROR" = "";
+          "__rawKey__vim.diagnostic.severity.WARN" = "";
+          "__rawKey__vim.diagnostic.severity.INFO" = "";
+          "__rawKey__vim.diagnostic.severity.HINT" = "";
         };
         numhl = {
-          "vim.diagnostic.severity.ERROR" = "DiagnosticSignError";
-          "vim.diagnostic.severity.WARN" = "DiagnosticSignWarn";
-          "vim.diagnostic.severity.INFO" = "DiagnosticSignInfo";
-          "vim.diagnostic.severity.HINT" = "DiagnosticSignHint";
+          "__rawKey__vim.diagnostic.severity.ERROR" = "DiagnosticSignError";
+          "__rawKey__vim.diagnostic.severity.WARN" = "DiagnosticSignWarn";
+          "__rawKey__vim.diagnostic.severity.INFO" = "DiagnosticSignInfo";
+          "__rawKey__vim.diagnostic.severity.HINT" = "DiagnosticSignHint";
         };
       };
       underline = true;
