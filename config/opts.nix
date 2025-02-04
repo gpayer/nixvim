@@ -20,6 +20,8 @@
     globals = {
       mapleader = " ";
       maplocaleader = " ";
+      eadirection = "ver";
+      equalalways = true;
     };
 
     clipboard.providers.xsel.enable = true;
@@ -30,11 +32,11 @@
       severity_sort = false;
       signs = {
         text = {
-          # TODO: either use fancy nerdcode icons or show highlighted line numbers
-          # "vim.diagnostic.severity.ERROR" = "";
-          # "vim.diagnostic.severity.WARN" = "";
-          # "vim.diagnostic.severity.INFO" = "";
-          # "vim.diagnostic.severity.HINT" = "";
+          # TODO: this does not work yet
+          "vim.diagnostic.severity.ERROR" = "";
+          "vim.diagnostic.severity.WARN" = "";
+          "vim.diagnostic.severity.INFO" = "";
+          "vim.diagnostic.severity.HINT" = "H";
         };
         linehl = {
             "vim.diagnostic.severity.ERROR" = "ErrorMsg";
