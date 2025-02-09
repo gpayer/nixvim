@@ -1,7 +1,7 @@
 { createKeymaps, ... }:
 {
   imports = [
-    ./plugin-hover.nix
+    ../plugins/hover.nix
   ];
 
   config = {

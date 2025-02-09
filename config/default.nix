@@ -10,6 +10,7 @@
     ./git-conflict.nix
     ./copilot.nix
     ./hover.nix
+    ./filenav.nix
     ./dap.nix
     ./golang
   ];
