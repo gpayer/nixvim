@@ -46,6 +46,7 @@
                 bg = cp.mantle,
               },
               CursorLineNr = { fg = cp.green },
+              WinSeparator = { fg = "#7f7fa0" },
 
               ["@variable.parameter"] = { fg = cp.red },
               ["@variable.member"] = { fg = cp.red },

@@ -66,7 +66,11 @@
 
       harpoon.enable = true;
 
-      which-key.enable = true;
+      which-key = {
+        enable = true;
+
+        settings.win.border = "rounded";
+      };
 
       yanky.enable = true;
       undotree.enable = true;
