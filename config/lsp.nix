@@ -23,6 +23,10 @@
             };
           };
           templ.enable = true;
+
+          ts_ls.enable = true;
+          volar.enable = true;
+
           efm = {
             enable = true;
             filetypes = ["go"];
