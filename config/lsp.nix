@@ -27,6 +27,11 @@
           ts_ls.enable = true;
           volar.enable = true;
 
+          pylsp = {
+            enable = true;
+            package = pkgs.python313Packages.python-lsp-server;
+          };
+
           efm = {
             enable = true;
             filetypes = ["go"];
