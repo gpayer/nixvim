@@ -1,4 +1,4 @@
-{ pkgs, lib, createKeymaps, ... }:
+{ createKeymaps, ... }:
 
 {
   config = {
@@ -7,34 +7,10 @@
         enable = true;
 
         servers = {
-          # TODO: add more servers: lua, htmx, docker-compose, docker, (vue?), arduino/c++, python
-          # TODO: check how language specific confs can be separated into modules (efm might be difficult)
           nixd.enable = true;
-          gopls = {
-            enable = true;
-            settings = {
-              gopls = {
-                completeUnimported = true;
-                usePlaceholders = true;
-                analyses = {
-                  unusedparams = true;
-                };
-              };
-            };
-          };
-          templ.enable = true;
-
-          ts_ls.enable = true;
-          volar.enable = true;
-
-          pylsp = {
-            enable = true;
-            package = pkgs.python313Packages.python-lsp-server;
-          };
 
           efm = {
             enable = true;
-            filetypes = ["go"];
 
             # TODO: is this necessary?
             onAttach.function = ''
@@ -56,22 +32,6 @@
             extraOptions.init_options = {
               documentFormatting = true;
               documentRangeFormatting = true;
-            };
-
-            extraOptions.settings.languages = {
-              go = lib.mkForce [
-                {
-                  __raw = "require 'efmls-configs.formatters.gofmt'";
-                }
-                {
-                  __raw = "require 'efmls-configs.formatters.goimports'";
-                }
-                {
-                  lintCommand = "staticcheck `dirname \${INPUT}`";
-                  lintStdin = false;
-                  lintIgnoreExitCode = true;
-                }
-              ];
             };
           };
         };
@@ -107,8 +67,6 @@
         enable = true;
       };
     };
-
-    extraPackages = [ pkgs.go-tools ];
 
     keymaps = createKeymaps {
       "v" = [

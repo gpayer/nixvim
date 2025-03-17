@@ -31,22 +31,12 @@
       perSystem = {
         pkgs,
         system,
-        lib,
         ...
       }: let
         nixvimLib = nixvim.lib.${system};
-        nixvim' = nixvim.legacyPackages.${system};
-        createKeymaps = (import ./config/createkeymaps.nix { inherit lib; });
-        # templ = templ.legacyPackages.${system};
-        nvim = nixvim'.makeNixvimWithModule {
-          inherit pkgs;
-          module = self.lib.${system}.nixvimModules.default;
-          # You can use `extraSpecialArgs` to pass additional arguments to your module files
-          extraSpecialArgs = {
-          #   inherit (inputs);
-            inherit createKeymaps;
-          };
-        };
+        nixvimModules = self.lib.${system}.nixvimModules;
+        makeNixVim = self.lib.${system}.makeNixVim;
+        nvim = makeNixVim nixvimModules.default;
         custom-package = self.lib.${system}.custom-package;
       in {
         checks = {
@@ -70,16 +60,51 @@
               (custom-package nvim "supereditor")
             ];
           };
+
+          python = pkgs.mkShell {
+            name = "Shell with renamed nixvim for python";
+
+            packages = [
+              (custom-package (makeNixVim nixvimModules.python) "pyvim")
+            ];
+          };
         };
       };
 
       flake = flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system}; in
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        lib = pkgs.lib;
+        nixvim' = nixvim.legacyPackages.${system};
+        createKeymaps = (import ./config/createkeymaps.nix { inherit lib; });
+      in
       {
         lib = {
+          # TODO: make this more configurable for someone importing this flake
           nixvimModules = {
-            default = import ./config;
+            default = { ... }: {
+              imports = [
+                ./config
+                ./config/golang
+                ./config/frontend
+              ];
+            };
+            python = { ... }: {
+              imports = [
+                ./config
+                ./config/python
+              ];
+            };
             base = import ./config/base.nix;
+          };
+
+          makeNixVim = module: nixvim'.makeNixvimWithModule {
+            inherit pkgs module;
+            # You can use `extraSpecialArgs` to pass additional arguments to your module files
+            extraSpecialArgs = {
+            #   inherit (inputs);
+              inherit createKeymaps;
+            };
           };
 
           custom-package = nixvim-pkg: customName: pkgs.runCommand

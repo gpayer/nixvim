@@ -12,6 +12,5 @@
     ./hover.nix
     ./filenav.nix
     ./dap.nix
-    ./golang
   ];
 }
