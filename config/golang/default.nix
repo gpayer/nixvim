@@ -27,7 +27,7 @@
           templ.enable = true;
 
           efm = {
-            enable = true;
+            enable = false;
             filetypes = ["go"];
 
             extraOptions.settings.languages = {
@@ -49,6 +49,21 @@
         };
       };
 
+      conform-nvim = {
+        enable = true;
+        settings = { formatters_by_ft.go = [ "gofmt" "goimports"]; };
+      };
+      none-ls = {
+        enable = true;
+        sources = {
+          formatting = {
+            goimports.enable = true;
+            gofmt.enable = true;
+          };
+          diagnostics.staticcheck.enable = true;
+        };
+      };
+
       godoc = {
         enable = true;
 
@@ -58,7 +73,10 @@
       };
     };
 
-    extraPackages = [ pkgs.go-tools ];
+    # extraPackages = [
+    #   pkgs.go-tools
+    #   pkgs.gotools
+    # ];
 
     keymaps = createKeymaps {
       n = [

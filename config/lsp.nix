@@ -10,7 +10,7 @@
           nixd.enable = true;
 
           efm = {
-            enable = true;
+            enable = false;
 
             # TODO: is this necessary?
             onAttach.function = ''
@@ -54,12 +54,23 @@
       };
 
       efmls-configs = {
-        enable = true;
+        enable = false;
         setup = {
           # go = {
           #   formatter = ["gofmt" "goimports"];
           #   linter = [ "staticcheck" ];
           # };
+        };
+      };
+
+      conform-nvim = {
+        enable = true;
+        settings = {
+          format_on_save = {
+            lsp_fallback = "fallback";
+            timeout_ms = 500;
+          };
+          notify_on_error = true;
         };
       };
 
