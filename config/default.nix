@@ -12,5 +12,6 @@
     ./hover.nix
     ./filenav.nix
     ./dap.nix
+    ./codecompanion.nix
   ];
 }
