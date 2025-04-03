@@ -68,6 +68,14 @@
               (custom-package (makeNixVim nixvimModules.python) "pyvim")
             ];
           };
+
+          godot = pkgs.mkShell {
+            name = "Shell with renamed nixvim for godot";
+
+            packages = [
+              (custom-package (makeNixVim nixvimModules.godot) "gdvim")
+            ];
+          };
         };
       };
 
@@ -93,6 +101,12 @@
               imports = [
                 ./config
                 ./config/python
+              ];
+            };
+            godot = { ... }: {
+              imports = [
+                ./config
+                ./config/godot
               ];
             };
             base = import ./config/base.nix;

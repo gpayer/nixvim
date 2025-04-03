@@ -1,4 +1,4 @@
-{ pkgs, lib, createKeymaps, ... }:
+{ lib, createKeymaps, ... }:
 
 {
   imports = [
