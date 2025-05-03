@@ -9,6 +9,7 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils.url = "github:numtide/flake-utils";
+    mcphub-nvim.url = "github:ravitemer/mcphub.nvim";
   };
 
   outputs = {
@@ -116,8 +117,7 @@
             inherit pkgs module;
             # You can use `extraSpecialArgs` to pass additional arguments to your module files
             extraSpecialArgs = {
-            #   inherit (inputs);
-              inherit createKeymaps;
+              inherit createKeymaps inputs system;
             };
           };
 

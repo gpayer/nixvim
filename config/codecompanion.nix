@@ -21,9 +21,37 @@
           };
         };
 
+        # TODO: wait for version 15.x.x to hit nixpkgs-unstable for this to work
+        # or create your own codecompanion package
+        extensions = {
+          mcphub = {
+            callback = "mcphub.extensions.codecompanion";
+            opts = {
+              make_vars = true;
+              make_slash_commands = true;
+              show_result_in_chat = true; 
+            };
+          };
+        };
+
         strategies = {
           agent = { adapter = "gemini"; };
-          chat = { adapter = "gemini"; };
+          chat = {
+            adapter = "gemini";
+            tools = {
+              mcp = {
+                # Prevent mcphub from loading before needed
+                callback = {
+                  __raw = ''
+                function() 
+                        return require("mcphub.extensions.codecompanion") 
+                    end
+                  '';
+                };
+                description = "Call tools and resources from the MCP Servers";
+              };
+            };
+          };
           inline = { adapter = "gemini"; };
         };
       };
