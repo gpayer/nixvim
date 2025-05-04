@@ -1,8 +1,30 @@
-{ config, lib, createKeymaps, ... }:
+{ config, lib, createKeymaps, pkgs, ... }:
 {
   plugins = {
-    codecompanion = {
+    codecompanion = let
+      # TODO: remove this as soon as nixpkgs-unstable is updated
+      codecompanion-nvim = pkgs.vimUtils.buildVimPlugin rec {
+        pname = "codecompanion.nvim";
+        version = "15.1.4";
+        src = pkgs.fetchFromGitHub {
+          owner = "olimorris";
+          repo = "codecompanion.nvim";
+          rev = "v${version}";
+          sha256 = "sha256-7w7EepUbkoKRRerljJ3q1J13gxQfHmQW4DO43vYQL7E=";
+        };
+        dependencies = with pkgs.vimPlugins; [
+          plenary-nvim
+          telescope-nvim
+          mini-pick
+          mini-diff
+        ];
+        nvimSkipModules = [ "minimal" ];
+        meta.homepage = "https://github.com/olimorris/codecompanion.nvim/";
+        meta.hydraPlatforms = [ ];
+      };
+    in {
       enable = true;
+      package = codecompanion-nvim;
 
       settings = {
         adapters = {
@@ -12,7 +34,7 @@
                 return require('codecompanion.adapters').extend('gemini', {
                   schema = {
                     model = {
-                      default = 'gemini-2.5-pro-exp-03-25',
+                      default = 'gemini-2.5-pro-preview-03-25',
                     },
                   },
                 })
@@ -21,8 +43,6 @@
           };
         };
 
-        # TODO: wait for version 15.x.x to hit nixpkgs-unstable for this to work
-        # or create your own codecompanion package
         extensions = {
           mcphub = {
             callback = "mcphub.extensions.codecompanion";
@@ -36,22 +56,7 @@
 
         strategies = {
           agent = { adapter = "gemini"; };
-          chat = {
-            adapter = "gemini";
-            tools = {
-              mcp = {
-                # Prevent mcphub from loading before needed
-                callback = {
-                  __raw = ''
-                function() 
-                        return require("mcphub.extensions.codecompanion") 
-                    end
-                  '';
-                };
-                description = "Call tools and resources from the MCP Servers";
-              };
-            };
-          };
+          chat = { adapter = "gemini"; };
           inline = { adapter = "gemini"; };
         };
       };
