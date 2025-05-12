@@ -207,3 +207,33 @@ function CodeExtractor:move_cursor_to_symbol(symbol)
   end
   return -1
 end
+
+function CodeExtractor:move_cursor_to_position(bufnr, row, col)
+  if not self:is_valid_buffer(bufnr) then
+    vim.notify('Invalid buffer provided for position: ' .. bufnr, vim.log.levels.WARN)
+    return -1
+  end
+  -- Ensure row and col are valid numbers >= 1
+  if not (type(row) == "number" and row >= 1 and type(col) == "number" and col >= 1) then
+    vim.notify('Invalid row or column provided for position: row=' .. tostring(row) .. ', col=' .. tostring(col) .. '. Both must be >= 1.', vim.log.levels.WARN)
+    return -1
+  end
+
+  local win_ids = vim.fn.win_findbuf(bufnr)
+  if #win_ids > 0 then
+    -- Check if buffer is modifiable in the target window? Good practice but let's proceed for now.
+    -- if not vim.api.nvim_get_option_value('modifiable', { buf = bufnr }) then
+    --     vim.notify('Target buffer ' .. bufnr .. ' is not modifiable.', vim.log.levels.WARN)
+    --     -- Proceed anyway? Or return error?
+    -- end
+    vim.api.nvim_set_current_win(win_ids[1])
+    -- nvim_win_set_cursor expects 1-based row, 0-based col
+    pcall(vim.api.nvim_win_set_cursor, 0, { row, col - 1 }) -- Use pcall for safety
+    vim.notify(string.format("Moved cursor to Buf: %d, Row: %d, Col: %d", bufnr, row, col), vim.log.levels.INFO) -- Info level notification
+    return bufnr
+  else
+    vim.notify('No window found displaying buffer: ' .. bufnr, vim.log.levels.WARN)
+    return -1 -- Indicate failure
+  end
+end
+
