@@ -27,7 +27,7 @@
     clipboard.providers.xsel.enable = true;
 
 
-    diagnostics = {
+    diagnostic.settings = {
       float = {
         border = "rounded";
       };

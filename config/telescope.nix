@@ -26,6 +26,7 @@
             };
             sorting_strategy = "ascending";
             file_ignore_patterns = [ "^node_modules/" "^.git/" "^vendor/" ];
+            wrap_results = true;
           };
           pickers = {
             find_files = {
@@ -183,5 +184,17 @@
         };
       };
     };
+
+    autoCmd = [
+      {
+        event = "User";
+        pattern = "TelescopePreviewerLoaded";
+        callback.__raw = ''
+          function()
+            vim.wo.wrap = true
+          end
+        '';
+      }
+    ];
   };
 }
