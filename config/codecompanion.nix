@@ -41,6 +41,19 @@
               end
             '';
           };
+          copilot = {
+            __raw = ''
+              function()
+                return require('codecompanion.adapters').extend('copilot', {
+                  schema = {
+                    model = {
+                      default = 'gemini-2.5-pro',
+                    },
+                  },
+                })
+              end
+            '';
+          };
         };
 
         extensions = {
@@ -55,9 +68,9 @@
         };
 
         strategies = {
-          agent = { adapter = "gemini"; };
-          chat = { adapter = "gemini"; };
-          inline = { adapter = "gemini"; };
+          agent = { adapter = "copilot"; };
+          chat = { adapter = "copilot"; };
+          inline = { adapter = "copilot"; };
         };
       };
     };
