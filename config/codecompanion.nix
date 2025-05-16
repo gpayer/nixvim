@@ -41,7 +41,20 @@
                 return require('codecompanion.adapters').extend('gemini', {
                   schema = {
                     model = {
-                      default = 'gemini-2.5-pro-preview-05-06',
+                      default = 'gemini-2.5-pro-preview-03-25',
+                    },
+                  },
+                })
+              end
+            '';
+          };
+          copilot = {
+            __raw = ''
+              function()
+                return require('codecompanion.adapters').extend('copilot', {
+                  schema = {
+                    model = {
+                      default = 'gemini-2.5-pro',
                     },
                   },
                 })
@@ -62,9 +75,9 @@
         };
 
         strategies = {
-          agent = { adapter = "gemini"; };
+          agent = { adapter = "copilot"; };
           chat = {
-            adapter = "gemini";
+            adapter = "copilot";
             tools = {
               lsp = {
                 description = "Extract information for symbols by querying the LSPs.";
@@ -271,7 +284,7 @@ Content:
               };
             };
           };
-          inline = { adapter = "gemini"; };
+          inline = { adapter = "copilot"; };
         };
       };
     };
