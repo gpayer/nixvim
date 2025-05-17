@@ -13,6 +13,7 @@
     ./filenav.nix
     ./dap.nix
     ./codecompanion.nix
+    ./codecompanion-history.nix
     ./mcphub.nix
   ];
 }

@@ -5,12 +5,12 @@
       # TODO: remove this as soon as nixpkgs-unstable is updated
       codecompanion-nvim = pkgs.vimUtils.buildVimPlugin rec {
         pname = "codecompanion.nvim";
-        version = "15.4.1";
+        version = "15.4.2";
         src = pkgs.fetchFromGitHub {
           owner = "olimorris";
           repo = "codecompanion.nvim";
           rev = "v${version}";
-          sha256 = "sha256-QaMhacXZVnrn6yEbREHgaQeClCFt+han9uIbQBpc1vw=";
+          sha256 = "sha256-3mXRSdGLFOoaJM8lXhTP8FOKUbnIBlViY/l3Slt8UvY=";
         };
         dependencies = with pkgs.vimPlugins; [
           plenary-nvim
@@ -65,11 +65,37 @@
 
         extensions = {
           mcphub = {
+            enabled = true;
             callback = "mcphub.extensions.codecompanion";
             opts = {
               make_vars = true;
               make_slash_commands = true;
               show_result_in_chat = true; 
+            };
+          };
+          history = {
+            enabled = true;
+            opts = {
+                # Keymap to open history from chat buffer (default: gh)
+                keymap = "gh";
+                # Keymap to save the current chat manually (when auto_save is disabled)
+                save_chat_keymap = "sc";
+                # Save all chats by default (disable to save only manually using 'sc')
+                auto_save = true;
+                # Number of days after which chats are automatically deleted (0 to disable)
+                expiration_days = 0;
+                # Picker interface ("telescope" or "snacks" or "fzf-lua" or "default")
+                picker = "telescope";
+                # Automatically generate titles for new chats
+                auto_generate_title = true;
+                # On exiting and entering neovim, loads the last chat on opening chat
+                continue_last_chat = false;
+                # When chat is cleared with `gx` delete the chat from history
+                delete_on_clearing_chat = false;
+                # Directory path to save the chats
+                dir_to_save.__raw = ''vim.fn.stdpath("data") .. "/codecompanion-history"'';
+                # Enable detailed logging for history extension
+                enable_logging = false;
             };
           };
         };
@@ -188,8 +214,8 @@
                   };
                   system_prompt = ''## LSP Tool (`lsp`) Guidelines
 
-## MANDATORY USAGE
-Use `get_definition`, `get_references` or `get_implementation` AT THE START of EVERY coding task to gather context before answering. Don't overuse these actions. Think what is needed to solve the task, don't fall into rabbit hole.
+## Usage
+If you lack context for symbols in a piece of code, use `get_definition`, `get_references` or `get_implementation` to gather context before answering.
 
 ## Purpose
 Traverses the codebase to find definitions, references, or implementations of code symbols to provide error proof solution
