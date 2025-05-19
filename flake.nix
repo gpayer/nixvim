@@ -10,6 +10,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils.url = "github:numtide/flake-utils";
     mcphub-nvim.url = "github:ravitemer/mcphub.nvim";
+    mcp-hub.url = "github:ravitemer/mcp-hub";
   };
 
   outputs = {
