@@ -14,6 +14,7 @@
     ./dap.nix
     ./codecompanion.nix
     ./codecompanion-history.nix
+    ./vectorcode.nix
     ./mcphub.nix
   ];
 }

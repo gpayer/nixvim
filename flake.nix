@@ -60,6 +60,7 @@
 
             packages = [
               (custom-package nvim "supereditor")
+              pkgs.vectorcode
             ];
           };
 
