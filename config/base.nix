@@ -12,6 +12,7 @@
 
   config = {
     plugins = {
+      lz-n.enable = true;
       oil.enable = true;
 
       treesitter = {

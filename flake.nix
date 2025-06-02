@@ -52,6 +52,7 @@
         packages = {
           # Lets you run `nix run .` to start nixvim
           default = nvim;
+          base = makeNixVim nixvimModules.base;
         };
 
         devShells = {
@@ -61,6 +62,14 @@
             packages = [
               (custom-package nvim "supereditor")
               pkgs.vectorcode
+            ];
+          };
+
+          base = pkgs.mkShell {
+            name = "Shell with renamed nixvim for base";
+
+            packages = [
+              (custom-package (makeNixVim nixvimModules.base) "basevim")
             ];
           };
 
