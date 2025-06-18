@@ -4,14 +4,14 @@ let
   inherit (lib.nixvim) defaultNullOpts;
   # inherit (lib) types;
 
-  godoc-nvim = pkgs.vimUtils.buildVimPlugin {
+  godoc-nvim = pkgs.vimUtils.buildVimPlugin rec {
     pname = "godoc.nvim";
-    version = "1.3.0";
+    version = "2.3.0";
     src = pkgs.fetchFromGitHub {
       owner = "fredrikaverpil";
       repo = "godoc.nvim";
-      rev = "v1.3.0";
-      sha256 = "sha256-hz8Dz5Ah7D8l5XKgWp85Q4JzyZPOg9WnuFu17F/KCKw=";
+      rev = "v${version}";
+      sha256 = "sha256-w5NP/Hb7e/ZROVvc5+C0xxz4ecnWPdo6ICaCPlpaWhs=";
     };
     meta.homepage = "https://github.com/fredrikaverpil/godoc.nvim/";
   };

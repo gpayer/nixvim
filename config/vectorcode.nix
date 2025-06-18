@@ -3,12 +3,12 @@
 let
   vectorcode-nvim = pkgs.vimUtils.buildVimPlugin rec {
     pname = "vectorcode.nvim";
-    version = "0.6.7";
+    version = "0.6.13";
     src = pkgs.fetchFromGitHub {
       owner = "Davidyz";
       repo = "VectorCode";
       rev = "${version}";
-      sha256 = "sha256-BDDvALeQSBVld2gEmcnlpf3GDpdEs64nFyE6cNKpeww=";
+      sha256 = "sha256-ok6n0gW6Ahqr7vdoJ2Mj6Kz72mTmSbxIO3bG82T7QQI=";
     };
     dependencies = with pkgs.vimPlugins; [
       plenary-nvim
@@ -36,10 +36,12 @@ let
     meta.homepage = "https://github.com/Davidyz/VectorCode/";
     meta.hydraPlatforms = [ ];
   };
+  
+  codecompanionEnabled = config.plugins.codecompanion.enable or false;
 in
 {
-  extraPlugins = lib.mkIf config.plugins.codecompanion.enable [vectorcode-nvim];
-  extraConfigLua = ''
+  extraPlugins = lib.mkIf codecompanionEnabled [vectorcode-nvim];
+  extraConfigLua = lib.mkIf codecompanionEnabled ''
     require("vectorcode").setup()
   '';
 }
