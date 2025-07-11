@@ -61,7 +61,7 @@
 
             packages = [
               (custom-package nvim "supereditor")
-              # TODO: vectorcode 0.6.10 from unstable is broken atm
+              # TODO: vectorcode from unstable is broken atm
               # pkgs.vectorcode
             ];
           };
