@@ -8,32 +8,6 @@
 
         servers = {
           nixd.enable = true;
-
-          efm = {
-            enable = false;
-
-            # TODO: is this necessary?
-            onAttach.function = ''
-                if client.supports_method("textDocument/formatting") then
-                  vim.api.nvim_clear_autocmds({
-                    group = augroup,
-                    buffer = bufnr,
-                  })
-                  vim.api.nvim_create_autocmd("BufWritePre", {
-                    group = augroup,
-                    buffer = bufnr,
-                    callback = function()
-                      vim.lsp.buf.format({ bufnr = bufnr })
-                    end,
-                  })
-                end
-            '';
-
-            extraOptions.init_options = {
-              documentFormatting = true;
-              documentRangeFormatting = true;
-            };
-          };
         };
 
         keymaps = {
@@ -53,22 +27,11 @@
         };
       };
 
-      efmls-configs = {
-        enable = false;
-        setup = {
-          # go = {
-          #   formatter = ["gofmt" "goimports"];
-          #   linter = [ "staticcheck" ];
-          # };
-        };
-      };
-
       conform-nvim = {
         enable = true;
         settings = {
-          format_on_save = {
+          format_after_save = {
             lsp_fallback = "fallback";
-            timeout_ms = 500;
           };
           notify_on_error = true;
         };

@@ -7,13 +7,17 @@
         enable = true;
 
         servers = {
-          ts_ls.enable = true;
+          ts_ls = {
+            enable = true;
+            onAttach.function = ''
+              client.server_capabilities.documentFormattingProvider = false
+            '';
+          };
           volar.enable = true;
         };
       };
 
       conform-nvim = {
-        enable = true;
         settings = {
           formatters_by_ft = { 
             javascript = [ "prettier" ];
@@ -21,17 +25,6 @@
             vue = [ "prettier" ];
             html = [ "prettier" ];
             css = [ "prettier" ];
-          };
-        };
-      };
-      none-ls = {
-        enable = true;
-        sources = {
-          formatting = {
-            prettier = {
-              enable = true;
-              disableTsServerFormatter = true;
-            };
           };
         };
       };

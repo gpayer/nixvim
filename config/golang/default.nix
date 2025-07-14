@@ -1,4 +1,4 @@
-{ lib, createKeymaps, ... }:
+{ pkgs, lib, createKeymaps, ... }:
 
 {
   imports = [
@@ -50,18 +50,7 @@
       };
 
       conform-nvim = {
-        enable = true;
-        settings = { formatters_by_ft.go = [ "gofmt" "goimports"]; };
-      };
-      none-ls = {
-        enable = true;
-        sources = {
-          formatting = {
-            goimports.enable = true;
-            gofmt.enable = true;
-          };
-          diagnostics.staticcheck.enable = true;
-        };
+        settings = { formatters_by_ft.go = [ "goimports" "gofmt" ]; };
       };
 
       godoc = {
@@ -73,10 +62,11 @@
       };
     };
 
-    # extraPackages = [
-    #   pkgs.go-tools
-    #   pkgs.gotools
-    # ];
+    # conform-nvim does not automatically install formatters, so we need to specify them here
+    extraPackages = [
+      pkgs.go-tools
+      pkgs.gotools
+    ];
 
     keymaps = createKeymaps {
       n = [
