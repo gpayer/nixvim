@@ -63,6 +63,7 @@
               (custom-package nvim "supereditor")
               # TODO: vectorcode from unstable is broken atm
               # pkgs.vectorcode
+              pkgs.fd
             ];
           };
 
@@ -71,6 +72,7 @@
 
             packages = [
               (custom-package (makeNixVim nixvimModules.base) "basevim")
+              pkgs.fd
             ];
           };
 
@@ -79,6 +81,7 @@
 
             packages = [
               (custom-package (makeNixVim nixvimModules.python) "pyvim")
+              pkgs.fd
             ];
           };
 
@@ -87,6 +90,7 @@
 
             packages = [
               (custom-package (makeNixVim nixvimModules.godot) "gdvim")
+              pkgs.fd
             ];
           };
         };
