@@ -15,6 +15,7 @@
       clipboard = "unnamedplus";
 
       scrolloff = 15;
+      sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions";
     };
 
     globals = {

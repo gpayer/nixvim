@@ -1,4 +1,4 @@
-{ pkgs, lib, createKeymaps, ... }:
+{ pkgs, createKeymaps, ... }:
 
 {
   imports = [
@@ -25,27 +25,6 @@
             };
           };
           templ.enable = true;
-
-          efm = {
-            enable = false;
-            filetypes = ["go"];
-
-            extraOptions.settings.languages = {
-              go = lib.mkForce [
-                {
-                  __raw = "require 'efmls-configs.formatters.gofmt'";
-                }
-                {
-                  __raw = "require 'efmls-configs.formatters.goimports'";
-                }
-                {
-                  lintCommand = "staticcheck `dirname \${INPUT}`";
-                  lintStdin = false;
-                  lintIgnoreExitCode = true;
-                }
-              ];
-            };
-          };
         };
       };
 

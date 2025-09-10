@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   config = {
     plugins = {
       lsp = {
@@ -19,12 +17,12 @@
 
       conform-nvim = {
         settings = {
-          formatters_by_ft = { 
-            javascript = [ "prettier" ];
-            typescript = [ "prettier" ];
-            vue = [ "prettier" ];
-            html = [ "prettier" ];
-            css = [ "prettier" ];
+          formatters_by_ft = {
+            javascript = ["prettier"];
+            typescript = ["prettier"];
+            vue = ["prettier"];
+            html = ["prettier"];
+            css = ["prettier"];
           };
         };
       };
