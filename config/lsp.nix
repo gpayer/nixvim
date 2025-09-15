@@ -14,8 +14,8 @@
 
         keymaps = {
           diagnostic = {
-            "]d" = "goto_prev";
-            "[d" = "goto_next";
+            "]d" = "goto_next";
+            "[d" = "goto_prev";
           };
 
           lspBuf = {
