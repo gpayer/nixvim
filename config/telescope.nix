@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   config = {
     plugins = {
       telescope = {
@@ -25,7 +23,7 @@
               prompt_position = "top";
             };
             sorting_strategy = "ascending";
-            file_ignore_patterns = [ "^node_modules/" "^.git/" "^vendor/" ];
+            file_ignore_patterns = ["^node_modules/" "^.git/" "^vendor/"];
             wrap_results = true;
           };
           pickers = {
@@ -97,10 +95,10 @@
             action = "buffers";
             options.desc = "View buffers";
           };
-          # "<leader>fc" = {
-          #   action = "grep_string";
-          #   options.desc = "Grep string";
-          # };
+          "<leader>fW" = {
+            action = "grep_string";
+            options.desc = "Grep string";
+          };
           "<leader>fd" = {
             action = "diagnostics";
             options.desc = "View diagnostics";
