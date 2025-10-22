@@ -1,8 +1,11 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  ...
+}: {
   plugins = {
     copilot-lua = {
-      enable = true;
+      enable = false;
 
       settings = {
         suggestion = {

@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   # Import all your configuration modules here
   imports = [
     ./base.nix
@@ -9,6 +7,7 @@
     ./lazygit.nix
     ./git-conflict.nix
     ./copilot.nix
+    ./supermaven.nix
     ./hover.nix
     ./filenav.nix
     ./dap.nix
