@@ -1,5 +1,4 @@
-{ createKeymaps, ... }:
-{
+{createKeymaps, ...}: {
   imports = [
     ../plugins/hover.nix
   ];
@@ -10,14 +9,14 @@
       # providers = ["lsp" "diagnostics"];
     };
 
-    opts = {
-      mousemoveevent = true;
-    };
+    # opts = {
+    #   mousemoveevent = true;
+    # };
 
     keymaps = createKeymaps {
       n = [
-        ["K" "function() require('hover').hover() end" "Show hover information" { raw = true;}]
-        ["<MouseMove>" "function() require('hover').hover_mouse() end" "Show hover information on mouse move" { raw = true;}]
+        ["K" "function() require('hover').hover() end" "Show hover information" {raw = true;}]
+        # ["<MouseMove>" "function() require('hover').hover_mouse() end" "Show hover information on mouse move" { raw = true;}]
       ];
     };
   };
