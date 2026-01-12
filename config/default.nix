@@ -6,14 +6,14 @@
     ./lsp.nix
     ./lazygit.nix
     ./git-conflict.nix
-    ./copilot.nix
+    # ./copilot.nix
     ./supermaven.nix
     ./hover.nix
     ./filenav.nix
     ./dap.nix
-    ./codecompanion.nix
-    ./codecompanion-history.nix
-    ./vectorcode.nix
-    ./mcphub.nix
+    # ./codecompanion.nix
+    # ./codecompanion-history.nix
+    # ./vectorcode.nix
+    # ./mcphub.nix
   ];
 }

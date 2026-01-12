@@ -1,30 +1,31 @@
-{ ... }:
-
-{
+{...}: {
   config = {
     colorschemes.catppuccin = {
       enable = true;
       settings = {
-        background = { light = "latte"; dark = "mocha"; }; # latte, frappe, macchiato, mocha
-    		dim_inactive = {
-			    enabled = false;
+        background = {
+          light = "latte";
+          dark = "mocha";
+        }; # latte, frappe, macchiato, mocha
+        dim_inactive = {
+          enabled = false;
           # Dim inactive splits/windows/buffers.
           # NOT recommended if you use old palette (a.k.a., mocha).
           shade = "dark";
           percentage = 0.15;
-		    };
-		    #transparent_background = transparent_background,
+        };
+        #transparent_background = transparent_background,
         show_end_of_buffer = false; # show the '~' characters after the end of buffers
         term_colors = true;
         #compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
         styles = {
-          comments = [ "italic" ];
-          functions = [ "bold" ];
-          keywords = [ "italic" ];
-          operators = [ "bold" ];
-          conditionals = [ "bold" ];
-          loops = [ "bold" ];
-          booleans = [ "bold" "italic" ];
+          comments = ["italic"];
+          functions = ["bold"];
+          keywords = ["italic"];
+          operators = ["bold"];
+          conditionals = ["bold"];
+          loops = ["bold"];
+          booleans = ["bold" "italic"];
           numbers = [];
           types = [];
           strings = [];
@@ -120,6 +121,16 @@
               ["@keyword.return"] = { fg = cp.pink, style = clear },
               ["@error.c"] = { fg = cp.none, style = clear },
               ["@error.cpp"] = { fg = cp.none, style = clear },
+
+              -- For custom statusline
+              StatusLine = { fg = cp.blue, bg = cp.mantle },
+              StatusLineAccent = { fg = cp.base, bg=cp.blue },
+              StatusLineInsertAccent = { fg = cp.base, bg=cp.green },
+              StatusLineVisualAccent = { fg = cp.base, bg=cp.mauve },
+              StatusLineReplaceAccent = { fg = cp.base, bg=cp.red },
+              StatusLineCmdLineAccent = { fg = cp.base, bg=cp.peach },
+              StatusLineTerminalAccent = { fg = cp.base, bg=cp.yellow },
+              StatusLineExtra = { fg = cp.base, bg=cp.blue },
             }
           end
         '';

@@ -1,13 +1,12 @@
-{ createKeymaps, ... }:
-
-{
+{createKeymaps, ...}: {
   imports = [
     ./opts.nix
     ./performance.nix
     ./catppuccin.nix
     ./bufferline.nix
     ./telescope.nix
-    ./lualine.nix
+    # ./lualine.nix
+    ./statusline.nix
   ];
 
   config = {
@@ -40,12 +39,7 @@
 
       web-devicons.enable = true;
 
-      mini = {
-        enable = false;
-        modules = {
-          statusline = {};
-        };
-      };
+      # mini-statusline.enable = true;
 
       neogit.enable = true;
 
@@ -79,12 +73,12 @@
     };
     keymaps = createKeymaps {
       "n" = [
-        ["<esc>" "<cmd>noh<CR>" "Clear search highlight" { silent = true; }]
+        ["<esc>" "<cmd>noh<CR>" "Clear search highlight" {silent = true;}]
         ["Y" "yy" "Y => yy"]
         ["<tab>" "<cmd>bnext<CR>" "Switch to next buffer"]
         ["<S-tab>" "<cmd>bprev<CR>" "Switch to previous buffer"]
-        ["<leader>e" "function () require('oil').open_float() end" "Open oil floating window" { raw = true; }]
-        ["<leader>go" "function () require('neogit').open({ kind = 'auto'}) end" "Open neogit" { raw = true; }]
+        ["<leader>e" "function () require('oil').open_float() end" "Open oil floating window" {raw = true;}]
+        ["<leader>go" "function () require('neogit').open({ kind = 'auto'}) end" "Open neogit" {raw = true;}]
         ["<leader>x" "<cmd>bdelete<CR>" "Close buffer"]
         ["<leader>cp" "<cmd> cprev<CR>" "Previous entry in quickfix list"]
         ["<leader>cn" "<cmd> cnext<CR>" "Next entry in quickfix list"]
@@ -96,62 +90,98 @@
         ["<leader>lP" "<cmd> lfirst<CR>" "First entry in location list"]
         ["<leader>lN" "<cmd> llast<CR>" "Last entry in location list"]
         ["<leader>lc" "<cmd> lclose<CR>" "Close location list"]
-        ["<leader><Tab>" "<cmd> b#<CR>" "Switch to previously used buffer" ]
-        ["<leader>h" ''function () require("harpoon.mark").add_file() end'' "Add file to harpoon list" { raw = true; }]
-        ["<C-e>" "<cmd> Telescope harpoon marks<CR>" "open harpoon list" ]
-        ["[t" ''function ()
-          require("todo-comments").jump_prev()
-        end'' "Next TODO" { raw = true; }]
-        ["]t" ''function ()
-          require("todo-comments").jump_next()
-        end'' "Previous TODO" { raw = true; }]
+        ["<leader><Tab>" "<cmd> b#<CR>" "Switch to previously used buffer"]
+        ["<leader>h" ''function () require("harpoon.mark").add_file() end'' "Add file to harpoon list" {raw = true;}]
+        ["<C-e>" "<cmd> Telescope harpoon marks<CR>" "open harpoon list"]
+        [
+          "[t"
+          ''            function ()
+                      require("todo-comments").jump_prev()
+                    end''
+          "Next TODO"
+          {raw = true;}
+        ]
+        [
+          "]t"
+          ''            function ()
+                      require("todo-comments").jump_next()
+                    end''
+          "Previous TODO"
+          {raw = true;}
+        ]
         ["<leader>ft" "<cmd> TodoTelescope<CR>" "Find TODOs"]
-        ["p" "<Plug>(YankyPutAfter)" "paste after" ]
-        ["P" "<Plug>(YankyPutBefore)" "paste before" ]
-        ["gp" "<Plug>(YankyGPutAfter)" "paste after" ]
-        ["gP" "<Plug>(YankyGPutBefore)" "paste before" ]
-        ["<C-n>" "<Plug>(YankyCycleForward)" "yanky cycle forward" ]
-        ["<C-p>" "<Plug>(YankyCycleBackward)" "yanky cycle backward" ]
-        ["<C-h>" "<cmd>lua require('tmux-navigator').left()<CR>" "tmux navigate left" ]
-        ["<C-j>" "<cmd>lua require('tmux-navigator').down()<CR>" "tmux navigate down" ]
-        ["<C-k>" "<cmd>lua require('tmux-navigator').up()<CR>" "tmux navigate up" ]
-        ["<C-l>" "<cmd>lua require('tmux-navigator').right()<CR>" "tmux navigate right" ]
+        ["p" "<Plug>(YankyPutAfter)" "paste after"]
+        ["P" "<Plug>(YankyPutBefore)" "paste before"]
+        ["gp" "<Plug>(YankyGPutAfter)" "paste after"]
+        ["gP" "<Plug>(YankyGPutBefore)" "paste before"]
+        ["<C-n>" "<Plug>(YankyCycleForward)" "yanky cycle forward"]
+        ["<C-p>" "<Plug>(YankyCycleBackward)" "yanky cycle backward"]
+        ["<C-h>" "<cmd>lua require('tmux-navigator').left()<CR>" "tmux navigate left"]
+        ["<C-j>" "<cmd>lua require('tmux-navigator').down()<CR>" "tmux navigate down"]
+        ["<C-k>" "<cmd>lua require('tmux-navigator').up()<CR>" "tmux navigate up"]
+        ["<C-l>" "<cmd>lua require('tmux-navigator').right()<CR>" "tmux navigate right"]
         # gitsigns
-        ["]c" ''function()
-            vim.schedule(function()
-              require("gitsigns").next_hunk()
-            end)
-          end
-        '' "Go to next hunk" { raw = true; }]
-        ["[c" ''function()
-            vim.schedule(function()
-              require("gitsigns").prev_hunk()
-            end)
-          end
-        '' "Go to next hunk" { raw = true; }]
-        ["<leader>rh" ''
-          function()
-            require("gitsigns").reset_hunk()
-          end''
-          "Reset hunk" { raw = true; }]
+        [
+          "]c"
+          ''            function()
+                        vim.schedule(function()
+                          require("gitsigns").next_hunk()
+                        end)
+                      end
+          ''
+          "Go to next hunk"
+          {raw = true;}
+        ]
+        [
+          "[c"
+          ''            function()
+                        vim.schedule(function()
+                          require("gitsigns").prev_hunk()
+                        end)
+                      end
+          ''
+          "Go to next hunk"
+          {raw = true;}
+        ]
+        [
+          "<leader>rh"
+          ''
+            function()
+              require("gitsigns").reset_hunk()
+            end''
+          "Reset hunk"
+          {raw = true;}
+        ]
 
-        ["<leader>ph" ''
-          function()
-            require("gitsigns").preview_hunk()
-          end''
-          "Preview hunk" { raw = true; }]
+        [
+          "<leader>ph"
+          ''
+            function()
+              require("gitsigns").preview_hunk()
+            end''
+          "Preview hunk"
+          {raw = true;}
+        ]
 
-        ["<leader>gb" ''
-          function()
-            require('gitsigns').blame_line()
-          end''
-          "Blame line" { raw = true; }]
+        [
+          "<leader>gb"
+          ''
+            function()
+              require('gitsigns').blame_line()
+            end''
+          "Blame line"
+          {raw = true;}
+        ]
 
-        ["<leader>td" ''
-          function()
-            require("gitsigns").toggle_deleted()
-          end''
-          "Toggle deleted" { raw = true; }]
+        [
+          "<leader>td"
+          ''
+            function()
+              require("gitsigns").toggle_deleted()
+            end''
+          "Toggle deleted"
+          {raw = true;}
+        ]
       ];
     };
   };

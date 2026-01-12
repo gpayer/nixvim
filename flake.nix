@@ -20,7 +20,7 @@
     flake-parts,
     flake-utils,
     ...
-  } @ inputs: 
+  } @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = flake-utils.lib.defaultSystems;
       # [
@@ -96,31 +96,29 @@
         };
       };
 
-      flake = flake-utils.lib.eachDefaultSystem (system:
-      let
+      flake = flake-utils.lib.eachDefaultSystem (system: let
         pkgs = nixpkgs.legacyPackages.${system};
         lib = pkgs.lib;
         nixvim' = nixvim.legacyPackages.${system};
-        createKeymaps = (import ./config/createkeymaps.nix { inherit lib; });
-      in
-      {
+        createKeymaps = import ./config/createkeymaps.nix {inherit lib;};
+      in {
         lib = {
           # TODO: make this more configurable for someone importing this flake
           nixvimModules = {
-            default = { ... }: {
+            default = {...}: {
               imports = [
                 ./config
                 ./config/golang
                 ./config/frontend
               ];
             };
-            python = { ... }: {
+            python = {...}: {
               imports = [
                 ./config
                 ./config/python
               ];
             };
-            godot = { ... }: {
+            godot = {...}: {
               imports = [
                 ./config
                 ./config/godot
@@ -129,21 +127,23 @@
             base = import ./config/base.nix;
           };
 
-          makeNixVim = module: nixvim'.makeNixvimWithModule {
-            inherit pkgs module;
-            # You can use `extraSpecialArgs` to pass additional arguments to your module files
-            extraSpecialArgs = {
-              inherit createKeymaps inputs system;
+          makeNixVim = module:
+            nixvim'.makeNixvimWithModule {
+              inherit pkgs module;
+              # You can use `extraSpecialArgs` to pass additional arguments to your module files
+              extraSpecialArgs = {
+                inherit createKeymaps inputs system;
+              };
             };
-          };
 
-          custom-package = nixvim-pkg: customName: pkgs.runCommand
+          custom-package = nixvim-pkg: customName:
+            pkgs.runCommand
             # derivation name:
             "custom-nvim-${customName}"
             # derivation args:
             {
               # mainProgram should match your symlink's name though
-              meta = nixvim-pkg.meta // { mainProgram = customName; };
+              meta = nixvim-pkg.meta // {mainProgram = customName;};
             }
             # build script:
             ''
@@ -151,6 +151,6 @@
               ln -s "${pkgs.lib.getExe nixvim-pkg}" $out/bin/${customName}
             '';
         };
-    });
-  };
+      });
+    };
 }
